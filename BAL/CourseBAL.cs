@@ -12,16 +12,16 @@ namespace SprinCTTest_Basvaraj.BAL
             _configuration = configuration;
         }
 
-        public ResponseModel<CourseModel> AddCourse(CourseModel model)
+        public async Task<ResponseModel<CourseModel>> AddCourse(CourseModel model)
         {
             var courseDAL = new CourseDAL(_configuration);
-            return courseDAL.AddCourse(model);
+            return await courseDAL.AddCourse(model);
         }
 
-        public ResponseModel<CourseModel> DeleteCourse(int id)
+        public async Task<ResponseModel<CourseModel>> DeleteCourse(int id)
         {
             var courseDAL = new CourseDAL(_configuration);
-            return courseDAL.DeleteCourse(id);
+            return await courseDAL.DeleteCourse(id);
         }
     }
 }

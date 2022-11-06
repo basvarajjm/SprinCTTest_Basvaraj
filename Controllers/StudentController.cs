@@ -21,39 +21,39 @@ namespace SprinCTTest_Basvaraj.Controllers
         }
 
         [HttpPost("AddStudent")]
-        public IActionResult AddStudent(StudentModel model)
+        public async Task<IActionResult> AddStudent(StudentModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            var result = StudentBAL.AddStudent(model);
+            var result = await StudentBAL.AddStudent(model);
             return Ok(result);
         }
 
         [HttpPost]
         [Route("AssignCourse")]
-        public IActionResult AssignCourse(AssignCoursesToStudentModel model)
+        public async Task<IActionResult> AssignCourse(AssignCoursesToStudentModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            var result = StudentBAL.AssignCoursesToStudent(model);
+            var result = await StudentBAL.AssignCoursesToStudent(model);
             return Ok(result);
         }
 
         [HttpGet("GetStudents")]
-        public IActionResult GetStudentsList()
+        public async Task<IActionResult> GetStudentsList()
         {
-            var result = StudentBAL.GetStudentsAndCourseEnrolledList();
+            var result = await StudentBAL.GetStudentsAndCourseEnrolledList();
             return Ok(result);
         }
 
         [HttpGet("GetStudentsListByCourseName")]
-        public IActionResult GetStudentsListByCourseName(string courseName)
+        public async Task<IActionResult> GetStudentsListByCourseName(string courseName)
         {
-            var result = StudentBAL.GetStudentsListByCourseName(courseName);
+            var result = await StudentBAL.GetStudentsListByCourseName(courseName);
             return Ok(result);
         }
 

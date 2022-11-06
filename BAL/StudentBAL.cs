@@ -14,25 +14,25 @@ namespace SprinCTTest_Basvaraj.BAL
             StudentDAL = new StudentDAL(_configuration);
         }
 
-        public ResponseModel<StudentModel> AddStudent(StudentModel model)
+        public async Task<ResponseModel<StudentModel>> AddStudent(StudentModel model)
         {
-            return StudentDAL.AddStudent(model);
+            return await StudentDAL.AddStudent(model);
         }
 
-        public ResponseModel<object> AssignCoursesToStudent(AssignCoursesToStudentModel model)
+        public async Task<ResponseModel<object>> AssignCoursesToStudent(AssignCoursesToStudentModel model)
         {
-            return StudentDAL.AssignCoursesToStudent(model);
+            return await StudentDAL.AssignCoursesToStudent(model);
         }
 
-        public ResponseModel<List<StudentCoursesModel>> GetStudentsAndCourseEnrolledList()
+        public async Task<ResponseModel<List<StudentCoursesModel>>> GetStudentsAndCourseEnrolledList()
         {
-            return StudentDAL.GetStudentsAndCourseEnrolledList();
+            return await StudentDAL.GetStudentsAndCourseEnrolledList();
      
         }
         
-        public ResponseModel<List<GetStudentByCourseModel>> GetStudentsListByCourseName(string courseName)
+        public async Task<ResponseModel<List<GetStudentByCourseModel>>> GetStudentsListByCourseName(string courseName)
         {
-            return StudentDAL.GetStudentsListByCourseName(courseName);
+            return await StudentDAL.GetStudentsListByCourseName(courseName);
 
         }
     }

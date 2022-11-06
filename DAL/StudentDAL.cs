@@ -1,4 +1,5 @@
-﻿using SprinCTTest_Basvaraj.Models;
+﻿using SprinCTTest_Basvaraj.Logger;
+using SprinCTTest_Basvaraj.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -15,7 +16,7 @@ namespace SprinCTTest_Basvaraj.DAL
             _configuration = configuration;
         }
 
-        public ResponseModel<StudentModel> AddStudent(StudentModel model)
+        public async Task<ResponseModel<StudentModel>> AddStudent(StudentModel model)
         {
             try
             {
@@ -43,6 +44,7 @@ namespace SprinCTTest_Basvaraj.DAL
             }
             catch (Exception ex)
             {
+                await ErrorLogger.LogMessage(_configuration, ex);
                 return new ResponseModel<StudentModel>()
                 {
                     Data = new StudentModel(),
@@ -59,7 +61,7 @@ namespace SprinCTTest_Basvaraj.DAL
             };
         }
 
-        public ResponseModel<object> AssignCoursesToStudent(AssignCoursesToStudentModel model)
+        public async Task<ResponseModel<object>> AssignCoursesToStudent(AssignCoursesToStudentModel model)
         {
             try
             {
@@ -90,6 +92,7 @@ namespace SprinCTTest_Basvaraj.DAL
             }
             catch (Exception ex)
             {
+                await ErrorLogger.LogMessage(_configuration, ex);
                 return new ResponseModel<object>()
                 {
                     Status = 500,
@@ -99,7 +102,7 @@ namespace SprinCTTest_Basvaraj.DAL
             }
         }
 
-        public ResponseModel<List<StudentCoursesModel>> GetStudentsAndCourseEnrolledList()
+        public async Task<ResponseModel<List<StudentCoursesModel>>> GetStudentsAndCourseEnrolledList()
         {
             var list = new List<StudentCoursesModel>();
             try
@@ -127,6 +130,7 @@ namespace SprinCTTest_Basvaraj.DAL
             }
             catch (Exception ex)
             {
+                await ErrorLogger.LogMessage(_configuration, ex);
                 return new ResponseModel<List<StudentCoursesModel>>()
                 {
                     Data = new List<StudentCoursesModel>(),
@@ -143,7 +147,7 @@ namespace SprinCTTest_Basvaraj.DAL
             };
         }
 
-        public ResponseModel<List<GetStudentByCourseModel>> GetStudentsListByCourseName(string courseName)
+        public async Task<ResponseModel<List<GetStudentByCourseModel>>> GetStudentsListByCourseName(string courseName)
         {
             var list = new List<GetStudentByCourseModel>();
             try
@@ -180,15 +184,6 @@ namespace SprinCTTest_Basvaraj.DAL
                             data.Phone = Convert.ToString(ds.Tables[0].Rows[i]["Phone"]);
                             map[cn].Add(data);
                         }
-                        //GetStudentByCourseModel data = new GetStudentByCourseModel();
-                        //data.CourseName = Convert.ToString(ds.Tables[0].Rows[i]["CourseName"]);
-                        //data.Students = new List<StudentModel>();
-
-                        //data.Name = Convert.ToString(ds.Tables[0].Rows[i]["Name"]);
-                        //data.Email = Convert.ToString(ds.Tables[0].Rows[i]["Email"]);
-                        //data.Phone = Convert.ToString(ds.Tables[0].Rows[i]["Phone"]);
-                        //data.CourseEnrolled = Convert.ToString(ds.Tables[0].Rows[i]["CourseEnrolled"]);
-                        //list.Add(data);
                     }
                     foreach (var item in map)
                     {
@@ -201,6 +196,7 @@ namespace SprinCTTest_Basvaraj.DAL
             }
             catch (Exception ex)
             {
+                await ErrorLogger.LogMessage(_configuration, ex);
                 return new ResponseModel<List<GetStudentByCourseModel>>()
                 {
                     Data = new List<GetStudentByCourseModel>(),

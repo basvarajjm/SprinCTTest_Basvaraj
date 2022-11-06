@@ -1,6 +1,7 @@
 ﻿using SprinCTTest_Basvaraj.Models;
 using System.Data.SqlClient;
 using System.Data;
+using SprinCTTest_Basvaraj.Logger;
 
 namespace SprinCTTest_Basvaraj.DAL
 {
@@ -13,7 +14,7 @@ namespace SprinCTTest_Basvaraj.DAL
             _configuration = configuration;
         }
 
-        public ResponseModel<CourseModel> AddCourse(CourseModel model)
+        public async Task<ResponseModel<CourseModel>> AddCourse(CourseModel model)
         {
             try
             {
@@ -41,6 +42,7 @@ namespace SprinCTTest_Basvaraj.DAL
             }
             catch (Exception ex)
             {
+                await ErrorLogger.LogMessage(_configuration, ex);
                 return new ResponseModel<CourseModel>()
                 {
                     Data = new CourseModel(),
@@ -57,7 +59,7 @@ namespace SprinCTTest_Basvaraj.DAL
             };
         }
 
-        public ResponseModel<CourseModel> DeleteCourse(int id)
+        public async Task<ResponseModel<CourseModel>> DeleteCourse(int id)
         {
             try
             {
@@ -87,6 +89,7 @@ namespace SprinCTTest_Basvaraj.DAL
             }
             catch (Exception ex)
             {
+                await ErrorLogger.LogMessage(_configuration, ex);
                 return new ResponseModel<CourseModel>()
                 {
                     Data = new CourseModel(),

@@ -19,22 +19,22 @@ namespace SprinCTTest_Basvaraj.Controllers
         }
 
         [HttpPost("AddCourse")]
-        public IActionResult AddCourse(CourseModel model)
+        public async Task<IActionResult> AddCourse(CourseModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
             CourseBAL courseBAL = new CourseBAL(_configuration);
-            var result = courseBAL.AddCourse(model);
+            var result = await courseBAL.AddCourse(model);
             return Ok(result);
         }
 
         [HttpDelete("DeleteCourse/Id")]
-        public IActionResult AddCourse(int id)
+        public async Task<IActionResult> DeleteCourse(int id)
         {
             CourseBAL courseBAL = new CourseBAL(_configuration);
-            var result = courseBAL.DeleteCourse(id);
+            var result = await courseBAL.DeleteCourse(id);
             return Ok(result);
         }
     }
